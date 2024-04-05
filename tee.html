@@ -1,0 +1,106 @@
+<section id="slider_area">
+			<?php if(mysqli_num_rows($resBanner)>0){?>
+				<div class="slider_active owl-carousel">
+				<?php while($rowBanner=mysqli_fetch_assoc($resBanner)){?>
+					<div class="single_slide">
+						<div class="container">
+							<div class="row">
+								<div class="col-lg-6 col-12">
+									<div class="single-slide-item-table">
+										<div class="single-slide-item-tablecell">
+											<div class="slider_content text-start slider-animated-2">						
+												<h4 class="animated"><?php echo $rowBanner['heading1']?> </h4>
+												<h1 class="animated"><?php echo $rowBanner['heading2']?></h1>
+												<?php
+												if($rowBanner['btn_txt'] !='' && $rowBanner['btn_link']!=''){
+												?>
+												<!--<a href="#" class="main_btn animated">Shop Now</a>-->
+												<a class="main_btn animated" href="<?php echo $rowBanner['btn_link']?>"><?php echo $rowBanner['btn_txt']?></a>
+												<?php } ?>
+											</div>
+										</div>
+									</div>	
+								</div>
+								
+								<div class="col-lg-6 col-12 text-end">
+									<img src="img/slider/1.png" alt="Slider Image">
+									<img src="<?php echo 'media/banner/'.$rowBanner['image']?>" alt="Slider Image" >
+								</div>
+							</div>
+							<?php } ?>
+						</div>
+					</div>
+					<?php } ?>
+				</div>
+			</section>
+		 <!--End Slider Area -->
+         
+         		<!-- Start product Area -->
+			<section id="product_area" class="section_padding">
+				<div class="container">		
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<div class="section_title">	
+								<span class="sub-title">All Products</span>
+								<h2>Our Products</h2>
+								<div class="divider"></div>							
+							</div>
+						</div>
+					</div>
+				
+					<div class="text-center">
+						<div class="product_filter">
+							<ul>
+								<li class=" active filter" data-filter="all">All</li>
+								<li class="filter" data-filter=".sale">Sale</li>
+								<li class="filter" data-filter=".bslr">Bestseller</li>
+								<li class="filter" data-filter=".ftrd">Featured</li>
+							</ul>
+						</div>
+						
+						<div class="product_item">
+							<div class="row">		
+								<div class="col-lg-3 col-md-3 col-12 mix sale">
+								<?php
+									$get_product=get_product($con,4);
+									foreach($get_product as $list){
+									?>
+									<div class="product-grid">
+										<div class="product-image">
+											<a href="#">
+												<img class="pic-1" src="<?php echo 'media/product_images/'.$list['image']?>" alt="product image">
+												<img class="pic-2" src="<?php echo 'media/product_images/'.$list['image']?>" alt="product image">
+											</a>
+											<ul class="social">
+												<li><a href="#" data-tip="Quick View"><i class="pe-7s-search"></i></a></li>
+												<li><a href="#" data-tip="Add to Wishlist"><i class="pe-7s-like"></i></a></li>
+												<li><a href="#" data-tip="Add to Cart"><i class="pe-7s-cart"></i></a></li>
+											</ul>
+											
+										</div>
+										
+										<div class="product-content">
+											<ul class="rating">
+												<li class="fa fa-star"></li>
+												<li class="fa fa-star"></li>
+												<li class="fa fa-star"></li>
+												<li class="fa fa-star"></li>
+												<li class="fa fa-star"></li>
+											</ul>
+											
+											<h3 class="title"><a href="product.php?id=<?php echo $list['id']?>"><?php echo $list['name']?></a></h3>
+											<div class="price"><span>&nbsp;&#8358;<?php echo $list['mrp']?></span><span>&#8358;<?php echo $list['price']?></span>
+												
+											</div>
+											
+										</div>
+									</div>
+									
+								</div><!-- End Col -->	
+								<?php } ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		<!-- End product Area -->
